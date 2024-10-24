@@ -6,7 +6,7 @@
 #    By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 10:53:06 by clundber          #+#    #+#              #
-#    Updated: 2024/10/22 14:24:17 by clundber         ###   ########.fr        #
+#    Updated: 2024/10/24 16:02:12 by clundber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ COLOUR_END=\033[0m
 NAME = Bureaucrat
 
 #------------- SOURCE FILES ------#
-CFILES = main.cpp Bureaucrat.cpp
+CFILES = main.cpp Bureaucrat.cpp Form.cpp
 
 OFILES = $(CFILES:.cpp=.o)
 
