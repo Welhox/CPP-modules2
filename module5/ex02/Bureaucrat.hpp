@@ -6,14 +6,14 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:23:15 by clundber          #+#    #+#             */
-/*   Updated: 2024/10/28 14:37:11 by clundber         ###   ########.fr       */
+/*   Updated: 2024/10/28 15:42:03 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # pragma once
 # include <string>
 # include <iostream>
-# include "Form.hpp"
+# include "AForm.hpp"
 
 class AForm;
 
@@ -36,7 +36,7 @@ public:
 	//getters & setters
 	const std::string getName();
 	unsigned int getGrade();
-	
+	unsigned int getGrade() const;
 
 	//exceptions
 	class GradeTooHighException : public std::exception{
@@ -49,7 +49,7 @@ public:
 	};
 
 	//functions
-	void signForm(Form&);
+	void signForm(AForm&);
 	void incrementGrade();
 	void decrementGrade();
 };

@@ -38,19 +38,24 @@ public:
 	//getters & setters
 	const std::string getName();
 	unsigned int getSignGrade();
+	unsigned int getExecuteGrade() const;
+	bool	getSignStatus() const;
 	unsigned int getExecuteGrade();
 	bool	getSignStatus();
 
 	//functions
 	void beSigned(Bureaucrat&);
 	virtual void execute(Bureaucrat const & executor) const = 0; //or should another function be virtual?
-
 	//exceptions
 	class GradeTooHighException : public std::exception{
 	public:
 		const char * what() const noexcept override;
 	};
 	class GradeTooLowException : public std::exception{
+	public:
+		const char * what() const noexcept override;
+	};
+	class NotSignedException : public std::exception{
 	public:
 		const char * what() const noexcept override;
 	};

@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 14:44:20 by clundber          #+#    #+#             */
-/*   Updated: 2024/10/28 14:54:19 by clundber         ###   ########.fr       */
+/*   Updated: 2024/10/28 15:37:16 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ public:
 	
 	//functions
 	void execute(Bureaucrat const & executor) const override;
-	
+	void execution() const;
 };

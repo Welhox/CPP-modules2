@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:22:48 by clundber          #+#    #+#             */
-/*   Updated: 2024/10/28 13:57:58 by clundber         ###   ########.fr       */
+/*   Updated: 2024/10/28 15:43:14 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ unsigned int Bureaucrat::getGrade(){
 	return(this->grade);
 }
 
+unsigned int Bureaucrat::getGrade() const{
+	return(this->grade);
+}
+
 void Bureaucrat::incrementGrade(){
 	grade--;
 	if (grade < 1)
@@ -57,7 +61,7 @@ void Bureaucrat::decrementGrade(){
 		throw GradeTooHighException();
 }
 
-void Bureaucrat::signForm(Form& form)
+void Bureaucrat::signForm(AForm& form)
 {
 	if (this->getGrade() <= form.getSignGrade() && !form.getSignStatus())
 		std::cout << this->getName() << " signed " << form.getName() << std::endl;
