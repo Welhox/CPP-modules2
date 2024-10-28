@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -17,7 +17,7 @@
 
 class Bureaucrat;
 
-class Form
+class AForm
 {
 private:
 	const				std::string _name;
@@ -27,13 +27,13 @@ private:
 	
 public:
 	//constructors and destructor
-	Form();
-	Form(std::string newName, unsigned int sign, unsigned int execute);
-	Form(Form&);
-	~Form();
+	AForm();
+	AForm(std::string newName, unsigned int sign, unsigned int execute);
+	AForm(AForm&);
+	virtual ~AForm();
 	
 	//overloads
-	Form& operator=(Form&);
+	AForm& operator=(AForm&);
 	
 	//getters & setters
 	const std::string getName();
@@ -43,6 +43,7 @@ public:
 
 	//functions
 	void beSigned(Bureaucrat&);
+	virtual void execute(Bureaucrat const & executor) const = 0; //or should another function be virtual?
 
 	//exceptions
 	class GradeTooHighException : public std::exception{
@@ -55,4 +56,4 @@ public:
 	};
 };
 
-std::ostream& operator<<(std::ostream& stream, Form& form);
+std::ostream& operator<<(std::ostream& stream, AForm& AForm);
