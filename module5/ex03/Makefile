@@ -6,7 +6,7 @@
 #    By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 10:53:06 by clundber          #+#    #+#              #
-#    Updated: 2024/10/29 11:47:16 by clundber         ###   ########.fr        #
+#    Updated: 2024/10/29 13:17:54 by clundber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ COLOUR_END=\033[0m
 NAME = Bureaucracy
 
 #------------- SOURCE FILES ------#
-CFILES = main.cpp AForm.cpp Bureaucrat.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
+CFILES = main.cpp AForm.cpp Bureaucrat.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp \
+PresidentialPardonForm.cpp Intern.cpp
 
 OFILES = $(CFILES:.cpp=.o)
 
