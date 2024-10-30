@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 14:45:30 by clundber          #+#    #+#             */
-/*   Updated: 2024/10/30 17:35:30 by clundber         ###   ########.fr       */
+/*   Updated: 2024/10/30 18:18:07 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@
 class ScalarConverter
 {
 private:
-
-public:
-
-	//constructors and destructor
 	ScalarConverter();
 	ScalarConverter(ScalarConverter&);
+
+public:
+	//constructors and destructor
 	~ScalarConverter();
 	
 	//overloads
