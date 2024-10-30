@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 13:18:18 by clundber          #+#    #+#             */
-/*   Updated: 2024/10/29 14:22:58 by clundber         ###   ########.fr       */
+/*   Updated: 2024/10/30 12:08:01 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,22 @@
 int	main()
 {
 	Intern someRandomIntern;
-	AForm* robot;
-	AForm* shrub;
-	AForm* pardon;
-	robot = someRandomIntern.makeForm("RobotomyRequestForm", "Bender");
+	AForm* robot = nullptr;
+	AForm* shrub = nullptr;
+	AForm* pardon = nullptr;
+	try
+	{
+	robot = someRandomIntern.makeForm("RobotomyRequestFor", "Bender");
 	shrub = someRandomIntern.makeForm("ShrubberyCreationForm", "airport");
 	pardon = someRandomIntern.makeForm("PresidentialPardonForm", "BanditTim");
 	Bureaucrat boss("Boss", 1);
 	Bureaucrat noob("Noob", 130);
-	
-	try
-	{
 		boss.signForm(*robot);
 		robot->beSigned(boss);
-		robot->execute(boss);
+		boss.executeForm(*robot);
 		boss.signForm(*shrub);
 		shrub->beSigned(boss);
-		shrub->execute(boss);
-		// pardon->execute(boss);
+		boss.executeForm(*shrub);
 		noob.signForm(*robot);
 		robot->beSigned(noob);
 	}

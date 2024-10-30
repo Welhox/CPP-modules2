@@ -37,6 +37,7 @@ public:
 	
 	//getters & setters
 	const std::string getName();
+	const std::string getName() const;
 	unsigned int getSignGrade();
 	unsigned int getExecuteGrade() const;
 	bool	getSignStatus() const;

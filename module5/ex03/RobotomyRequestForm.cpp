@@ -44,14 +44,15 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(RobotomyRequestForm& other)
 
 void RobotomyRequestForm::execution() const
 {
+	static int rand = 0;
 	std::cout << "Grousome drilling noises and a squealing robot " << '\n';
 	std::srand(std::time(0));
-	int random = std::rand();
+	int random = std::rand() + rand;
+	rand++;
 	if (random %2 == 1)
 		std::cout << _target << " has successfully been robotomized!" << '\n';
 	else
 		std::cout << "robotomy failed!" << '\n';	
-
 }
 
 void RobotomyRequestForm::execute(Bureaucrat const & executor) const

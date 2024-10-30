@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:22:48 by clundber          #+#    #+#             */
-/*   Updated: 2024/10/28 12:08:22 by clundber         ###   ########.fr       */
+/*   Updated: 2024/10/30 10:36:24 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void Bureaucrat::incrementGrade(){
 }
 
 void Bureaucrat::decrementGrade(){
-	grade--;
+	grade++;
 	if (grade > 150)
-		throw GradeTooHighException();
+		throw GradeTooLowException();
 }
 
 const char * Bureaucrat::GradeTooHighException::what() const noexcept {

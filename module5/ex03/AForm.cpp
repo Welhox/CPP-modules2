@@ -49,6 +49,11 @@ const std::string AForm::getName()
 	return(_name);
 }
 
+const std::string AForm::getName() const
+{
+	return(_name);
+}
+
 unsigned int AForm::getSignGrade()
 {
 	return(_signGrade);
@@ -86,16 +91,6 @@ void AForm::beSigned(Bureaucrat& bcrat)
 	else
 		throw GradeTooLowException();
 }
-
-// void AForm::execute(Bureaucrat const & executor) const
-// {
-// 	if (!this->_signed)
-// 		throw NotSignedException();
-// 	else if (executor.getGrade() > this->_executeGrade)
-// 		throw GradeTooLowException();
-// 	else
-
-// }
 
 const char * AForm::NotSignedException::what() const noexcept {
 	return ("Form not signed!");

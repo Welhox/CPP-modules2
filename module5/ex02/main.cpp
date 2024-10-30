@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 14:40:36 by clundber          #+#    #+#             */
-/*   Updated: 2024/10/29 14:24:15 by clundber         ###   ########.fr       */
+/*   Updated: 2024/10/30 11:48:39 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@ int main()
 	ShrubberyCreationForm pensas("hive");
 	Bureaucrat boss("Boss", 1);
 	Bureaucrat noob("noob", 145);
-	boss.signForm(pensas);
-	pensas.beSigned(boss);
 
 	ShrubberyCreationForm tree("park");
 	try
 	{
-		pensas.execute(boss);
-		pensas.execute(noob);
+		boss.signForm(pensas);
+		pensas.beSigned(boss);
+		boss.executeForm(pensas);
 		tree.execute(boss);
 	}
 	catch(const std::exception& e)
@@ -42,21 +41,21 @@ int main()
 	RobotomyRequestForm drill("Bender");
 	boss.signForm(drill);
 	drill.beSigned(boss);
-	drill.execute(boss);
+	boss.executeForm(drill);
+	boss.executeForm(drill);
+	boss.executeForm(drill);
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
 	}
 
-
-
 	try
 	{	
 	PresidentialPardonForm casi("Casi");
 	boss.signForm(casi);
 	casi.beSigned(boss);
-	casi.execute(boss);
+	boss.executeForm(casi);
 	}
 	catch(const std::exception& e)
 	{

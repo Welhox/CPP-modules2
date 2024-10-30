@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:23:15 by clundber          #+#    #+#             */
-/*   Updated: 2024/10/28 15:42:03 by clundber         ###   ########.fr       */
+/*   Updated: 2024/10/30 11:17:04 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ public:
 	
 	//getters & setters
 	const std::string getName();
+	const std::string getName() const;
 	unsigned int getGrade();
 	unsigned int getGrade() const;
 
@@ -52,6 +53,7 @@ public:
 	void signForm(AForm&);
 	void incrementGrade();
 	void decrementGrade();
+	void executeForm(AForm const & form);
 };
 
 std::ostream& operator<<(std::ostream& stream, Bureaucrat& bureaucrat);

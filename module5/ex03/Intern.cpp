@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 11:52:14 by clundber          #+#    #+#             */
-/*   Updated: 2024/10/29 14:15:47 by clundber         ###   ########.fr       */
+/*   Updated: 2024/10/30 11:40:45 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ AForm *Intern::makeForm(std::string form, std::string target)
 			return (new ShrubberyCreationForm(target));
 			break;						
 		default :
-			std::cout << "Form not found\n";
-			return(nullptr);
+			throw std::invalid_argument("Form not found");
 	}
 }
