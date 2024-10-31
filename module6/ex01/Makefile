@@ -6,7 +6,7 @@
 #    By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 10:53:06 by clundber          #+#    #+#              #
-#    Updated: 2024/10/31 16:06:08 by clundber         ###   ########.fr        #
+#    Updated: 2024/10/31 17:23:53 by clundber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ COLOUR_BLUE=\033[0;34m
 COLOUR_END=\033[0m
 
 # ------------ PROJECT -------#
-NAME = convert
+NAME = Serial
 
 #------------- SOURCE FILES ------#
 CFILES = main.cpp Serializer.cpp
