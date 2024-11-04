@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 14:45:57 by clundber          #+#    #+#             */
-/*   Updated: 2024/10/30 18:14:20 by clundber         ###   ########.fr       */
+/*   Updated: 2024/11/04 10:41:29 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ ScalarConverter& ScalarConverter::operator=(ScalarConverter& other){
 //methods
 void ScalarConverter::convert(std::string input)
 {
+	if (input.empty())
+		throw std::invalid_argument("incorrect argument");
 	int _type = inputType(input);
 	if (_type == _wrong)
 	{
