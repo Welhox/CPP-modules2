@@ -6,14 +6,11 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 14:45:57 by clundber          #+#    #+#             */
-/*   Updated: 2024/11/04 10:41:29 by clundber         ###   ########.fr       */
+/*   Updated: 2024/11/06 11:17:48 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 # include "ScalarConverter.hpp"
-
-
 
 int	inputType(std::string& input);
 void printType(std::string input, int _type);
