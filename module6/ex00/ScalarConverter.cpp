@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 14:45:57 by clundber          #+#    #+#             */
-/*   Updated: 2024/11/06 11:17:48 by clundber         ###   ########.fr       */
+/*   Updated: 2024/11/06 11:45:51 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void ScalarConverter::convert(std::string input)
 	else if (_type ==_float)
 	{
 		double temp = stod(input);
-		if (temp > __FLT_MAX__ || temp < __FLT_MIN__)
+		if (temp > __FLT_MAX__ || temp < -__FLT_MAX__)
 			throw std::invalid_argument("incorrect argument");
 		else
 		{
@@ -81,7 +81,7 @@ void ScalarConverter::convert(std::string input)
 	else if (_type == _double)
 	{
 		long double temp = stold(input);
-		if (temp > __DBL_MAX__ || temp < __DBL_MIN__)
+		if (temp > __DBL_MAX__ || temp < -__DBL_MAX__)
 			throw std::invalid_argument("incorrect argument");
 		else
 		{
@@ -114,7 +114,7 @@ void printOutput(const T& output, int _type)
 		std::cout << "char: " << static_cast<char>(output) << "\n";
 	
 	//int
-	if (_type == _double && (static_cast<long>(output) > INT_MAX || output < INT_MIN))
+	if (_type == _double && output < 21474836478 && output > -21474836478 (static_cast<long>(output) > INT_MAX || output < INT_MIN))
 		std::cout << "int: impossible\n";
 	else
 	 	std::cout << "int: " << static_cast<int>(output) << "\n";

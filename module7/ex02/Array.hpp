@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Iter.hpp                                           :+:      :+:    :+:   */
+/*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 23:32:51 by casimirri         #+#    #+#             */
-/*   Updated: 2024/11/06 12:01:38 by clundber         ###   ########.fr       */
+/*   Created: 2024/11/07 10:03:49 by clundber          #+#    #+#             */
+/*   Updated: 2024/11/07 18:10:24 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#pragma once
 
-template <typename T, typename Len, typename Func>
-void    iter(T *array, Len len, Func *func)
+# include <iostream>
+template<typename T>
+class Array
 {
-    try
-    {
-        for(Len i = 0; i < len; i++)
-        {
-            func(array[i]);
-        }
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-}
+private:
+	T 		*_array;
+	uint	_len;
+
+public:
+	//constructers and destructers
+	Array();
+	Array(uint len);
+	Array(Array&);
+	~Array();
+
+	//operator overloads
+	Array& operator=(Array&);
+	T& operator[](uint);
+	const T& operator[](uint) const;
+	//methods
+	uint size();
+};
+# include "Array.tpp"
