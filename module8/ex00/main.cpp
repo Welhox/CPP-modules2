@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   easyfind.hpp                                       :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/19 11:48:40 by clundber          #+#    #+#             */
-/*   Updated: 2025/01/16 11:25:25 by clundber         ###   ########.fr       */
+/*   Created: 2025/01/16 10:36:57 by clundber          #+#    #+#             */
+/*   Updated: 2025/01/16 11:25:58 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-#include <map>
+#include "easyfind.hpp"
 #include <iostream>
+#include <vector>
+#include <map>
+#include <unordered_map>
 
-template <typename T> 
-int easyfind(T container, int key)
+int main()
 {
-	for (auto it : container)
+	std::vector <int>container = {1, 2, 3, 4, 5};
+	try
 	{
-		if (it == key)
-			return (it);
+		std::cout << easyfind(container, 4) << std::endl;
+		std::cout << easyfind(container, 6) << std::endl;
 	}
-	throw std::invalid_argument("not found");
-};
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+}
