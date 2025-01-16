@@ -6,21 +6,29 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 10:36:57 by clundber          #+#    #+#             */
-/*   Updated: 2025/01/16 11:28:48 by clundber         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:51:19 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "easyfind.hpp"
 #include <iostream>
-#include <vector>
+#include "Span.hpp"
 
 int main()
 {
-	std::vector <int>container = {1, 2, 3, 4, 5};
 	try
 	{
-		std::cout << easyfind(container, 4) << std::endl;
-		std::cout << easyfind(container, 6) << std::endl;
+		Span sp(10);// = Span(5);
+		
+		sp.addNumber(0);
+		sp.addNumber(1);
+		// sp.addNumber(1200);
+		// sp.addNumber(9);
+		// sp.addNumber(11);
+		// sp.addNumber(-11);
+		// sp.addNumber(-1000);
+		
+		std::cout << sp.shortestSpan() << std::endl;
+		std::cout << sp.longestSpan() << std::endl;
 	}
 	catch(const std::exception& e)
 	{

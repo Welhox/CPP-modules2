@@ -1,29 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/16 10:36:57 by clundber          #+#    #+#             */
-/*   Updated: 2025/01/16 11:28:48 by clundber         ###   ########.fr       */
+/*   Created: 2025/01/16 11:29:17 by clundber          #+#    #+#             */
+/*   Updated: 2025/01/16 14:29:49 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "easyfind.hpp"
+#pragma once
+#include <set>
 #include <iostream>
-#include <vector>
+#include <algorithm>
 
-int main()
+class Span
 {
-	std::vector <int>container = {1, 2, 3, 4, 5};
-	try
-	{
-		std::cout << easyfind(container, 4) << std::endl;
-		std::cout << easyfind(container, 6) << std::endl;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-}
+private:
+	unsigned int maxSize; 
+	std::set <int>container;
+	
+public:	
+	//constructors and destructors
+	Span();
+	Span(uint size);
+	Span(Span&);
+	~Span();
+
+	//operator overloads
+	Span& operator=(Span&);
+
+	//methods
+	void	addNumber(int newNumber);
+	size_t	shortestSpan();
+	size_t	longestSpan();
+};
