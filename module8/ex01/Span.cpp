@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 11:29:07 by clundber          #+#    #+#             */
-/*   Updated: 2025/01/16 14:55:17 by clundber         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:15:40 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,20 @@
 
 Span::Span(): maxSize(1) {}
 Span::Span(uint size): maxSize(size) {}
+Span::Span(const Span& other): maxSize(other.maxSize), container(other.container) {}
 Span::Span(Span& other): maxSize(other.maxSize), container(other.container) {}
 Span::~Span() {}
 Span& Span::operator=(Span& other) 
+{
+	if (this != &other)
+	{
+		this->maxSize = other.maxSize;
+		this->container = other.container;
+	}
+	return(*this);
+}
+
+Span& Span::operator=(const Span& other) 
 {
 	if (this != &other)
 	{
@@ -53,6 +64,7 @@ size_t	Span::shortestSpan()
 			previous = it;
 		}
 	}
+	else throw std::invalid_argument("No span found");
 	if (spanMin == __SIZE_MAX__)
 		throw std::invalid_argument("No span found");
 	return (spanMin);
@@ -64,8 +76,34 @@ size_t	Span::longestSpan()
 
 	if (!container.empty())
 		span = (*container.rbegin() - *container.begin());
+	else throw std::invalid_argument("No span found");
 	if (span == 0)
 		throw std::invalid_argument("No span found");
-	std::cout << "END == " << *container.rbegin() << "BEGIN = " << *container.begin() << std::endl;
 	return (span);
+}
+
+void	Span::addRange(int start, int end)
+{
+	if (start > end)
+		std::swap(start, end);
+	size_t rangeSize = end - start;
+	if (container.size() < maxSize)
+	{
+		if ((container.size() + rangeSize) >= maxSize)
+			throw std::invalid_argument("too large range for span capacity");
+		std::vector<int> temp(rangeSize);
+		std::iota(temp.begin(), temp.end(), start);
+		container.insert(temp.begin(), temp.end());
+	}
+	else
+		throw std::invalid_argument("Span already at max capacity");
+}
+
+void	Span::printRange()
+{
+	for (auto it : container)
+	{
+		std::cout << it << std::endl;
+	}
+	std::cout << std::endl;
 }

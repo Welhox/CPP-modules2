@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 10:36:57 by clundber          #+#    #+#             */
-/*   Updated: 2025/01/16 14:51:19 by clundber         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:16:14 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,18 @@ int main()
 {
 	try
 	{
-		Span sp(10);// = Span(5);
+		// Span sp = Span(500);
+		Span sp(10);
 		
 		sp.addNumber(0);
-		sp.addNumber(1);
-		// sp.addNumber(1200);
-		// sp.addNumber(9);
-		// sp.addNumber(11);
-		// sp.addNumber(-11);
-		// sp.addNumber(-1000);
-		
+		// sp.addNumber(99999999);
+		// sp.addRange(100000, -100000);
+		sp.addNumber(1200);
+		sp.addNumber(9);
+		sp.addNumber(11);
+		sp.addNumber(-11);
+		sp.addNumber(-1000);
+		// sp.printRange();
 		std::cout << sp.shortestSpan() << std::endl;
 		std::cout << sp.longestSpan() << std::endl;
 	}
