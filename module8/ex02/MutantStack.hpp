@@ -6,7 +6,7 @@
 /*   By: casimirri <clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:27:57 by clundber          #+#    #+#             */
-/*   Updated: 2025/01/21 13:20:07 by casimirri        ###   ########.fr       */
+/*   Updated: 2025/01/21 16:09:07 by casimirri        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,39 +25,20 @@ public:
     
     MutantStack& operator=(const MutantStack& other);
     
-    class Iterator 
-    {
-    private:
-        T* ptr;
-        
-    public:
-        using iterator_category = std::forward_iterator_tag;
-        using value_type = T;
-        using difference_type = std::ptrdiff_t;
-        using pointer = T*;
-        using reference = T&;
-
-        explicit Iterator(T* p);
-        
-    };
+    //brings the underlying container of the stack class into scope
+    using std::stack<T>::c;
     
+    //make aliases for iterators to correspond with the underlying class and 
+    //use typename because deque is a dependent type (<T>), this to instruct the
+    //compiler that it is a type (not a static member)
+    using iterator = typename std::deque<T>::iterator;
+    using constIterator = typename std::deque<T>::const_iterator;
     
-    // T& top();
-    // const T& top();
-    // bool empty();
-    // size_type size() const;
-    // void push(const T& value);
-    // void push(T&& value);
-    // void emplace(Args&&... args);
-    // void pop();
-    // void swap(MutantStack& other);
-    
-    // bool operator==(const MutantStack& left, const MutantStack& right);
-    // bool operator!=(const MutantStack& left, const MutantStack& right);
-    // bool operator<(const MutantStack& left, const MutantStack& right);
-    // bool operator<=(const MutantStack& left, const MutantStack& right);
-    // bool operator>(const MutantStack& left, const MutantStack& right);
-    // bool operator>=(const MutantStack& left, const MutantStack& right);
+    //Iterator functions
+    iterator begin();
+    iterator end();
+    constIterator begin() const;
+    constIterator end() const;
 };
 
 #include "MutantStack.tpp"
