@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+         #
+#    By: casimirri <clundber@student.hive.fi>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 10:53:06 by clundber          #+#    #+#              #
-#    Updated: 2025/01/16 12:21:45 by clundber         ###   ########.fr        #
+#    Updated: 2025/01/21 11:44:48 by casimirri        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,10 @@ COLOUR_BLUE=\033[0;34m
 COLOUR_END=\033[0m
 
 # ------------ PROJECT -------#
-NAME = Span
+NAME = MutantStack
 
 #------------- SOURCE FILES ------#
-CFILES = main.cpp Span.cpp
+CFILES = main.cpp
 
 OFILES = $(CFILES:.cpp=.o)
 
