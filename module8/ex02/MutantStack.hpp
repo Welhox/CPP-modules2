@@ -6,7 +6,7 @@
 /*   By: casimirri <clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:27:57 by clundber          #+#    #+#             */
-/*   Updated: 2025/01/21 16:09:07 by casimirri        ###   ########.fr       */
+/*   Updated: 2025/01/21 17:10:31 by casimirri        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 #include <stack>
 #include <iterator>
 
-template <typename T> 
-class MutantStack: public std::stack<T>
+//Container added in case other than default underlying container specified
+template <typename T,typename Container = std::deque<T>> 
+class MutantStack: public std::stack<T, Container>
 {
 public:
 	MutantStack();
@@ -26,13 +27,13 @@ public:
     MutantStack& operator=(const MutantStack& other);
     
     //brings the underlying container of the stack class into scope
-    using std::stack<T>::c;
+    using std::stack<T, Container>::c;
     
     //make aliases for iterators to correspond with the underlying class and 
-    //use typename because deque is a dependent type (<T>), this to instruct the
+    //use typename because underlying container is a dependent type (<T>), this to instruct the
     //compiler that it is a type (not a static member)
-    using iterator = typename std::deque<T>::iterator;
-    using constIterator = typename std::deque<T>::const_iterator;
+    using iterator = typename Container::iterator;
+    using constIterator = typename Container::const_iterator;
     
     //Iterator functions
     iterator begin();
