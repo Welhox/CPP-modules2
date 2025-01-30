@@ -6,13 +6,13 @@
 /*   By: casimirri <clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 14:40:00 by casimirri         #+#    #+#             */
-/*   Updated: 2025/01/31 00:26:46 by casimirri        ###   ########.fr       */
+/*   Updated: 2025/01/31 00:37:30 by casimirri        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange(){}
+BitcoinExchange::BitcoinExchange():queryPath("default"), valuePath("default"){}
 BitcoinExchange::~BitcoinExchange(){}
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& other)
 {
@@ -22,7 +22,9 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other)
 {
     if (this != &other)
     {
-        //copy things
+        this->queryPath = other.queryPath;
+		this->valuePath = other.valuePath;
+		this->valueDB = other.valueDB;
     }
     return (*this);
 }
