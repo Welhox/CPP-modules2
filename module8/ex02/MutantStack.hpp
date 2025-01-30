@@ -6,7 +6,7 @@
 /*   By: casimirri <clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:27:57 by clundber          #+#    #+#             */
-/*   Updated: 2025/01/21 17:10:31 by casimirri        ###   ########.fr       */
+/*   Updated: 2025/01/30 16:35:19 by casimirri        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ class MutantStack: public std::stack<T, Container>
 public:
 	MutantStack();
     MutantStack(const MutantStack& other);
-    //parameterized constructor
     ~MutantStack();
     
     MutantStack& operator=(const MutantStack& other);
