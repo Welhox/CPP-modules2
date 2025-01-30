@@ -6,7 +6,7 @@
 /*   By: casimirri <clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 14:40:00 by casimirri         #+#    #+#             */
-/*   Updated: 2025/01/31 00:11:21 by casimirri        ###   ########.fr       */
+/*   Updated: 2025/01/31 00:26:46 by casimirri        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ bool BitcoinExchange::mapDB()
     std::ifstream csv(valuePath);
     if (!csv.is_open())
     {
-        std::cerr << "Error: csv database error" << std::endl;
+        std::cerr << "Error: csv database error." << std::endl;
         return 1;
     }
     
@@ -72,25 +72,29 @@ bool BitcoinExchange::mapDB()
         std::getline(csv, line);
         if (line != "date,exchange_rate")
         {
-            std::cerr << "Error: csv database error2" << std::endl;
+            std::cerr << "Error: csv database error." << std::endl;
             return 1;
         }
         while(std::getline(csv, line))
         {
         std::stringstream lineStream(line);
-        std::getline(lineStream, key, ',');
-        std::getline(lineStream, value, ',');
-        if (!lineStream.eof())
+		if(!lineStream.eof())
+        	std::getline(lineStream, key, ',');
+		if(!lineStream.eof())
+			std::getline(lineStream, value, ',');
+        if (!lineStream.eof() || key.empty() || value.empty())
         {
-            std::cerr << "Error: unexpected information in csv file." << std::endl;
+            std::cerr << "Error: csv database error." << std::endl;
             return (true);
         }
         valueDB[key] = stod(value);
+		key.erase();
+		value.erase();
         }
     }
     catch(const std::exception& e)
     {
-         std::cerr << "Error: csv database error" << std::endl;
+         std::cerr << "Error: csv database error." << std::endl;
          return 1;
     }
     return (false);
