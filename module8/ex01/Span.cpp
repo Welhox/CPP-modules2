@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 11:29:07 by clundber          #+#    #+#             */
-/*   Updated: 2025/01/20 12:15:40 by clundber         ###   ########.fr       */
+/*   Updated: 2025/02/03 10:17:16 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	Span::addRange(int start, int end)
 {
 	if (start > end)
 		std::swap(start, end);
-	size_t rangeSize = end - start;
+	size_t rangeSize = end - start +1;
 	if (container.size() < maxSize)
 	{
 		if ((container.size() + rangeSize) >= maxSize)
@@ -105,5 +105,4 @@ void	Span::printRange()
 	{
 		std::cout << it << std::endl;
 	}
-	std::cout << std::endl;
 }
