@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 00:31:33 by casimirri         #+#    #+#             */
-/*   Updated: 2025/02/07 12:32:08 by clundber         ###   ########.fr       */
+/*   Updated: 2025/02/07 14:40:50 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ RPN::RPN(std::string newArg): arg(newArg)
 }
 void	RPN::doOperator(std::string& op)
 {
-	int bottom;
-	int top;
+	long long bottom;
+	long long top;
 	long long result = 0;
 
 	if (container.size() < 2)
@@ -67,10 +67,9 @@ void	RPN::doOperator(std::string& op)
 	default:
 		break;
 	}
-	if (result > __INT_MAX__|| result < (__INT_MAX__ * -1))
+	if (result > INT_MAX || result < INT_MIN)
 		throw std::invalid_argument("Too large result");
-	bottom = result;
-	container.push(bottom);
+	container.push((int)result);
 	
 }
 

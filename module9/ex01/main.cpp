@@ -6,14 +6,12 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 00:30:21 by casimirri         #+#    #+#             */
-/*   Updated: 2025/02/07 12:28:03 by clundber         ###   ########.fr       */
+/*   Updated: 2025/02/07 14:26:18 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "RPN.hpp"
-// #include <limits.h>
-#include <limits>
 
 int main(int argc, char *argv[])
 {
