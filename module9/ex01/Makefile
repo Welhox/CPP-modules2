@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: casimirri <clundber@student.hive.fi>       +#+  +:+       +#+         #
+#    By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 10:53:06 by clundber          #+#    #+#              #
-#    Updated: 2025/01/31 00:30:11 by casimirri        ###   ########.fr        #
+#    Updated: 2025/02/05 12:59:45 by clundber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,9 @@ CFILES = main.cpp  RPN.cpp
 
 OFILES = $(CFILES:.cpp=.o)
 
-%.o: %.cpp
+HEADERS = RPN.hpp
+
+%.o: %.cpp $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 #--------- FLAGS ----------#

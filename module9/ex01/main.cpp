@@ -3,16 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: casimirri <clundber@student.hive.fi>       +#+  +:+       +#+        */
+/*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 00:30:21 by casimirri         #+#    #+#             */
-/*   Updated: 2025/01/31 00:30:51 by casimirri        ###   ########.fr       */
+/*   Updated: 2025/02/07 12:28:03 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include "RPN.hpp"
+// #include <limits.h>
+#include <limits>
 
 int main(int argc, char *argv[])
 {
-    
+    if (argc < 2)
+		return 0;
+	try
+	{
+		RPN rpn(argv[1]);
+		rpn.calculate();
+		rpn.printStack();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+		return 1;
+	}
+	
+	return 0;
 }

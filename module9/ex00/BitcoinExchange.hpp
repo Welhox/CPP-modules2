@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: casimirri <clundber@student.hive.fi>       +#+  +:+       +#+        */
+/*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 14:40:47 by casimirri         #+#    #+#             */
-/*   Updated: 2025/01/30 23:36:40 by casimirri        ###   ########.fr       */
+/*   Updated: 2025/02/05 12:58:55 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

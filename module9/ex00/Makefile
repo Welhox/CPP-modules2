@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: casimirri <clundber@student.hive.fi>       +#+  +:+       +#+         #
+#    By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 10:53:06 by clundber          #+#    #+#              #
-#    Updated: 2025/01/30 17:19:17 by casimirri        ###   ########.fr        #
+#    Updated: 2025/02/05 12:58:31 by clundber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,9 @@ CFILES = main.cpp  BitcoinExchange.cpp
 
 OFILES = $(CFILES:.cpp=.o)
 
-%.o: %.cpp
+HEADERS = BitcoinExchange.hpp
+
+%.o: %.cpp $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 #--------- FLAGS ----------#
@@ -34,7 +36,7 @@ CFLAGS = -Wall -Wextra -Werror -std=c++20
 
 all: $(NAME)
 
-$(NAME): $(OFILES)
+$(NAME): $(OFILES) 
 	@echo "$(COLOUR_BLUE)compiling $(NAME)$(COLOUR_END)"
 	@$(CC) $(CFLAGS) $(OFILES) -o $(NAME) 
 	@echo "$(COLOUR_GREEN)$(NAME) compiled successfully$(COLOUR_END)"
