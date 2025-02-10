@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 00:31:33 by casimirri         #+#    #+#             */
-/*   Updated: 2025/02/07 14:40:50 by clundber         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:13:07 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	RPN::doOperator(std::string& op)
 		result = bottom - top;
 		break;
 	case '/':
+		if (bottom == 0 || top == 0)
+			throw std::invalid_argument("Division by 0 not allowed");
 		result = bottom / top;
 		break;
 	case '*':
@@ -93,18 +95,19 @@ int RPN::calculate()
 		else if (operators.find(block) != std::string::npos)
 		{
 			doOperator(block);
+			if (container.size() > 1)
+				throw std::invalid_argument("Error");
 		}
 		else
 			throw std::invalid_argument("Error");
 	}
-
+	
 	return 0;
 }
 
 void RPN::printStack()
 {
 	std::stack<int> temp = container;
-	std::cout << "Stack in reverse: \n";
 	while (!container.empty())
 	{
 		std::cout << container.top() << std::endl;

@@ -5,31 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 00:30:21 by casimirri         #+#    #+#             */
-/*   Updated: 2025/02/10 16:08:46 by clundber         ###   ########.fr       */
+/*   Created: 2025/02/10 11:21:17 by clundber          #+#    #+#             */
+/*   Updated: 2025/02/10 12:12:21 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include "RPN.hpp"
+#include "PmergeMe.hpp"
 
 int main(int argc, char *argv[])
 {
-    if (argc < 2)
-		return 0;
 	try
 	{
-		RPN rpn(argv[1]);
-		rpn.calculate();
-		rpn.printStack();
+		if (argc < 2)
+			throw std::invalid_argument("Error");
+		PmergeMe test;
+		test.argVal(argv);
+		test.executeVector(argv);
+		test.printVector();
+		
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
-		return 1;
+		std::cerr << "Error" << '\n';
+		return(1);
 	}
-	
-	return 0;
+	return(0);
 }
-
-// need to fix if multiple numbers in stack in the end. And acctual printing of sum (get rid of in reverse thing)
