@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:21:17 by clundber          #+#    #+#             */
-/*   Updated: 2025/02/10 12:12:21 by clundber         ###   ########.fr       */
+/*   Updated: 2025/02/10 19:28:13 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@ int main(int argc, char *argv[])
 	{
 		if (argc < 2)
 			throw std::invalid_argument("Error");
-		PmergeMe test;
-		test.argVal(argv);
-		test.executeVector(argv);
-		test.printVector();
+		PmergeMe sort;
+		sort.argVal(argv);
+		sort.printBefore();
+		sort.executeVector(argv);
+		sort.executeList(argv);
+		sort.printList();
+		// sort.printVector();
 		
 	}
 	catch(const std::exception& e)
