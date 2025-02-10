@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:21:58 by clundber          #+#    #+#             */
-/*   Updated: 2025/02/10 17:55:09 by clundber         ###   ########.fr       */
+/*   Updated: 2025/02/10 18:10:23 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,41 +56,39 @@
 		auto mid = pairVec.begin() + pairVec.size() / 2;
 		std::vector<int> left(pairVec.begin(), mid);
 		std::vector<int> right(mid, pairVec.end());
-		std::cout << "SIZE OF LEFT = " << left.size() << std::endl;
-		std::cout << "SIZE OF RIGHT = " << right.size() << std::endl;
 		pairVector(left);
 		pairVector(right);
-		// std::vector<int> temp;
+		std::vector<int> temp;
 		auto itL = left.begin();
 		auto itR = right.begin();
-		pairVec.clear();
+		// pairVec.clear();
 		while (itL != left.end() && itR != right.end())
 		{
-			std::cout << "what\n";
-			if (*itL >= *itR)
+			// std::cout << "what\n";
+			if (*itL <= *itR)
 			{
-				pairVec.push_back(*itL);
+				temp.push_back(*itL);
 				itL++;
 				// std::next(itL, 1);
 			}		
 			else
 			{
-				pairVec.push_back(*itR);
+				temp.push_back(*itR);
 				itR++;
 				// std::next(itR, 1);
 			}		
 		}
-		// if (left.begin() >= right.begin())
-		// {
-		// 	temp.emplace_back(left.front());
-		// 	left.erase(left.begin());
-		// }
-		// else
-		// {
-		// 	temp.emplace_back(right.front());
-		// 	right.erase(right.begin());
-		// }
-		// pairVec = temp;
+		while (itL != left.end())
+        {
+			temp.push_back(*itL++);
+		}
+    	while (itR != right.end())
+		{
+        	temp.push_back(*itR++);
+		}
+		printVector();
+		pairVec = temp;
+		printVector();
 		return ;
 	}
 	
@@ -113,7 +111,7 @@
 
 	void PmergeMe::printVector()
 	{
-		std::cout << "SIZE OF VECTOR = " << vector.size() << std::endl;
+		// std::cout << "SIZE OF VECTOR = " << vector.size() << std::endl;
 		for(auto it : vector)
 			std::cout << it <<' ';
 		std::cout << std::endl;
