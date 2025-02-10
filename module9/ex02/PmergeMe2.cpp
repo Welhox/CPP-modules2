@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:21:58 by clundber          #+#    #+#             */
-/*   Updated: 2025/02/10 17:55:09 by clundber         ###   ########.fr       */
+/*   Updated: 2025/02/10 15:54:26 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,58 +49,58 @@
 		
 	}
 	// template <typename container>
-	void PmergeMe::pairVector(std::vector<int>& pairVec)
+	void PmergeMe::pairVector(std::vector<std::vector<int>>& pairVec, int pairSize)
 	{
-		if (pairVec.size() < 2)
+		(void)pairSize;
+		// (void)pairVec;
+		
+		if (pairVec.size() <= 1)
 			return;
-		auto mid = pairVec.begin() + pairVec.size() / 2;
-		std::vector<int> left(pairVec.begin(), mid);
-		std::vector<int> right(mid, pairVec.end());
-		std::cout << "SIZE OF LEFT = " << left.size() << std::endl;
-		std::cout << "SIZE OF RIGHT = " << right.size() << std::endl;
-		pairVector(left);
-		pairVector(right);
-		// std::vector<int> temp;
-		auto itL = left.begin();
-		auto itR = right.begin();
-		pairVec.clear();
-		while (itL != left.end() && itR != right.end())
+
+		std::vector<std::vector<int>> temp;
+		for (auto it = pairVec.begin(); it != pairVec.end(); it++)
 		{
-			std::cout << "what\n";
-			if (*itL >= *itR)
+			auto it2 = std::next(it);
+			if (it2 != pairVec.end())
 			{
-				pairVec.push_back(*itL);
-				itL++;
-				// std::next(itL, 1);
-			}		
+				if (it2[0] < it[0])
+					std::swap(*it, *it2);
+				temp.push_back({(*it)[0], (*it2)[0]});
+				it = it2;
+			}
 			else
-			{
-				pairVec.push_back(*itR);
-				itR++;
-				// std::next(itR, 1);
-			}		
+				break; //need to store the odd value
 		}
-		// if (left.begin() >= right.begin())
-		// {
-		// 	temp.emplace_back(left.front());
-		// 	left.erase(left.begin());
-		// }
-		// else
-		// {
-		// 	temp.emplace_back(right.front());
-		// 	right.erase(right.begin());
-		// }
-		// pairVec = temp;
-		return ;
+		pairVector(temp, 2);
+		
 	}
 	
 	void PmergeMe::executeVector(char *argv[])
 	{
 		//start timer
 		for (int i = 1; argv[i]; i++)
-			vector.push_back(std::stoi(argv[i]));
-		// std::vector<std::vector<int>> temp;
-		pairVector(vector);
+			vector.emplace_back(std::stoi(argv[i]));
+		std::vector<std::vector<int>> temp;
+		for (auto it = vector.begin(); it != vector.end(); it++)
+		{
+			auto it2 = std::next(it);
+			if (it2 != vector.end())
+			{
+				temp.push_back({*it, *it2});
+				it = it2;
+			}
+			else
+				break; //need to store the odd value
+		}
+		pairVector(temp, 2);
+		std::cout << "Pairs:\n";
+    	for (const auto& pair : temp) {
+        for (int num : pair)
+            std::cout << num << " ";
+       	std::cout << "\n";
+    }
+
+
 
 		//end timer	
 	}
@@ -113,7 +113,6 @@
 
 	void PmergeMe::printVector()
 	{
-		std::cout << "SIZE OF VECTOR = " << vector.size() << std::endl;
 		for(auto it : vector)
 			std::cout << it <<' ';
 		std::cout << std::endl;

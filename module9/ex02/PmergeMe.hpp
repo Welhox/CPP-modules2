@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:22:20 by clundber          #+#    #+#             */
-/*   Updated: 2025/02/10 15:31:46 by clundber         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:17:30 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ public:
 	void sortVector();
 	
 	// template <typename container>
-	void pairVector(std::vector<std::vector<int>>& pairVec, int pairSize);
+	void pairVector(std::vector<int>& pairVec);
 };
