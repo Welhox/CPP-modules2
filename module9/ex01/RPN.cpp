@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPN.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
+/*   By: casimirri <clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 00:31:33 by casimirri         #+#    #+#             */
-/*   Updated: 2025/02/11 11:00:56 by clundber         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:01:07 by casimirri        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ RPN::RPN(std::string newArg): arg(newArg)
 {
 	if (arg.empty())
 		throw std::invalid_argument("Error");
-	std::regex pattern(R"(^(-?\d+)( (-?\d+|[+\-/*]))*$)");
+	std::regex pattern(R"(^(-?\d+(\s-?\d+)*(\s[+\-/*])*)$)");
 	if (!std::regex_match(arg, pattern))
 		throw std::invalid_argument("Error");
 	
@@ -95,8 +95,6 @@ int RPN::calculate()
 		else if (operators.find(block) != std::string::npos)
 		{
 			doOperator(block);
-			if (container.size() > 1)
-				throw std::invalid_argument("Error");
 		}
 		else
 			throw std::invalid_argument("Error");
