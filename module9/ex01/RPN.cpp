@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 00:31:33 by casimirri         #+#    #+#             */
-/*   Updated: 2025/02/10 16:13:07 by clundber         ###   ########.fr       */
+/*   Updated: 2025/02/11 11:00:56 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ RPN::RPN(std::string newArg): arg(newArg)
 {
 	if (arg.empty())
 		throw std::invalid_argument("Error");
-	std::regex pattern(R"(^(((-?\d+) )+([+\-/*] )*)*[+\-/*]?$)");
+	std::regex pattern(R"(^(-?\d+)( (-?\d+|[+\-/*]))*$)");
 	if (!std::regex_match(arg, pattern))
 		throw std::invalid_argument("Error");
 	
@@ -101,7 +101,8 @@ int RPN::calculate()
 		else
 			throw std::invalid_argument("Error");
 	}
-	
+	if (container.size() > 1)
+		throw std::invalid_argument("Error");
 	return 0;
 }
 
@@ -113,4 +114,9 @@ void RPN::printStack()
 		std::cout << container.top() << std::endl;
 		container.pop();
 	}
+}
+
+void RPN::printSum()
+{
+	std::cout << container.top() << std::endl;	
 }

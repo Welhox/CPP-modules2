@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 00:31:47 by casimirri         #+#    #+#             */
-/*   Updated: 2025/02/07 14:33:09 by clundber         ###   ########.fr       */
+/*   Updated: 2025/02/11 10:42:44 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,5 @@ public:
 	int 	calculate();
 	void	doOperator(std::string& op);
 	void 	printStack();
+	void 	printSum();
 };

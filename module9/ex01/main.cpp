@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 00:30:21 by casimirri         #+#    #+#             */
-/*   Updated: 2025/02/10 16:08:46 by clundber         ###   ########.fr       */
+/*   Updated: 2025/02/11 10:46:16 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int main(int argc, char *argv[])
 	{
 		RPN rpn(argv[1]);
 		rpn.calculate();
-		rpn.printStack();
+		// rpn.printStack();
+		rpn.printSum();
 	}
 	catch(const std::exception& e)
 	{
@@ -31,5 +32,3 @@ int main(int argc, char *argv[])
 	
 	return 0;
 }
-
-// need to fix if multiple numbers in stack in the end. And acctual printing of sum (get rid of in reverse thing)

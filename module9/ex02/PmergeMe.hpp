@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:22:20 by clundber          #+#    #+#             */
-/*   Updated: 2025/02/10 19:15:53 by clundber         ###   ########.fr       */
+/*   Updated: 2025/02/11 11:06:19 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <chrono>
 #include <iomanip>
 #include <unordered_set>
+#include <regex>
+
 class PmergeMe
 {
 private:

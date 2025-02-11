@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:21:58 by clundber          #+#    #+#             */
-/*   Updated: 2025/02/10 19:27:39 by clundber         ###   ########.fr       */
+/*   Updated: 2025/02/11 11:08:20 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 		{
 			this->list = other.list;
 			this->vector = other.vector;
+			this->before = other.before;
 		}
 		return (*this);
 	}
@@ -44,6 +45,7 @@
 
 	void PmergeMe::argVal(char* argv[])
 	{
+		std::regex numReg(R"(^-?\d+$)");
 		for (int i = 1; argv[i]; i++)
 		{
 			int temp = std::stoi(argv[i]);
@@ -53,7 +55,11 @@
 				throw std::invalid_argument("Error");
 		}
 		for (int i = 1; argv[i]; i++)
+		{
+			if (!std::regex_match(argv[i], numReg))
+				throw std::invalid_argument("Error");
 			before.push_back(std::stoi(argv[i]));
+		}
 		if (duplicateCheck())
 			throw std::invalid_argument("Error");
 	}

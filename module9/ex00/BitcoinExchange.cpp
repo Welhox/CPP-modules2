@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: casimirri <clundber@student.hive.fi>       +#+  +:+       +#+        */
+/*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 14:40:00 by casimirri         #+#    #+#             */
-/*   Updated: 2025/01/31 00:37:30 by casimirri        ###   ########.fr       */
+/*   Updated: 2025/02/11 10:39:06 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,6 @@ bool BitcoinExchange::validateValue(std::string &value, float &convertedValue)
         return true;
     }
     return true;
-    //possible problem with large negative numbers, should maybe catch - in the beginning
 }
 
 void BitcoinExchange::printError(std::string error)
