@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:21:58 by clundber          #+#    #+#             */
-/*   Updated: 2025/02/13 15:37:08 by clundber         ###   ########.fr       */
+/*   Updated: 2025/02/11 11:08:20 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,95 +64,74 @@
 			throw std::invalid_argument("Error");
 	}
 
-	void PmergeMe::chunkVec(std::vector<int>& vec, std::vector<std::vector<int>>& temp, int chunkSize)
+	void PmergeMe::sortVector(std::vector<int>& vec)
 	{
-		int pair = 0;
-		int nbr = 1;
-		for (size_t i = 0; i < vec.size(); i++)
+		if (vec.size() < 2)
+			return;
+		auto mid = vec.begin() + vec.size() / 2;
+		std::vector<int> left(vec.begin(), mid);
+		std::vector<int> right(mid, vec.end());
+		sortVector(left);
+		sortVector(right);
+		std::vector<int> temp;
+		auto itL = left.begin();
+		auto itR = right.begin();
+		while (itL != left.end() && itR != right.end())
 		{
-			if (pair >= (int)temp.size() -1)
-				temp.emplace_back();
-			temp[pair].emplace_back(vec[i]);
-			if (nbr % chunkSize == 0)
-				pair++;
-			nbr++;
+			if (*itL == *itR)
+				throw std::invalid_argument("Error");
+			else if (*itL < *itR)
+				temp.push_back(*itL++);
+			else
+				temp.push_back(*itR++);
 		}
+		while (itL != left.end())
+        {
+			temp.push_back(*itL++);
+		}
+    	while (itR != right.end())
+		{
+        	temp.push_back(*itR++);
+		}
+		vec = temp;
+		return ;
 	}
 
-	void PmergeMe::sortVector(std::vector<int>& vec, int chunkSize)
+	void PmergeMe::sortList(std::list<int>& lst)
 	{
-		if (chunkSize > (int)vec.size() / 2)
-			return ;
-		std::vector<std::vector<int>> temp;
-		// //create the chunks as sub vectors of temp
-		chunkVec(vec, temp, chunkSize);
-		//sort the chunks with its neighbour
-		for (size_t i = 0; i < temp.size(); i += 2)
+		if (lst.size() < 2)
+			return;
+		auto mid = std::next(lst.begin(), lst.size() / 2);
+		std::list<int> left;
+		std::list<int> right;
+		left.splice(left.begin(), lst, lst.begin(), mid);
+		right.splice(right.begin(), lst, lst.begin(), lst.end());		
+		sortList(left);
+		sortList(right);
+		std::list<int> temp;
+		auto itL = left.begin();
+		auto itR = right.begin();
+		while (itL != left.end() && itR != right.end())
 		{
-			if (i + 1 >= temp.size())
-				break ;
-			if(temp[i].empty() || temp[i +1].empty())
-				break;
-			if (temp[i].back() > temp[i+1].back() && (int)temp[i+1].size() == chunkSize)
-				std::swap(temp[i], temp[i +1]);	
+			if (*itL == *itR)
+				throw std::invalid_argument("Error");
+			else if (*itL < *itR)
+				temp.push_back(*itL++);
+			else
+				temp.push_back(*itR++);
 		}
-		vec.clear();
-		//put the chunks back to vec for the next iteration
-		for (size_t i = 0; i < temp.size(); i++)
+		while (itL != left.end())
+        {
+			temp.push_back(*itL++);
+		}
+    	while (itR != right.end())
 		{
-			for (auto it : temp[i])
-				vec.emplace_back(it);
+        	temp.push_back(*itR++);
 		}
-		printVector();
-		//recursively call itself again to do larger chunks
-		temp.clear();
-		sortVector(vec, chunkSize * 2);
-		chunkVec(vec, temp, chunkSize);
-		if (temp.size() % chunkSize != 0)
-		{
-			leftover = temp.back();
-			if (!vec.empty())
-				temp.pop_back();
-		}
-		vec.clear();
-		
-
-		
-
-		
-
-
-		
-		// if (vec.size() < 2)
-		// 	return;
-		// auto mid = vec.begin() + vec.size() / 2;
-		// std::vector<int> left(vec.begin(), mid);
-		// std::vector<int> right(mid, vec.end());
-		// sortVector(left);
-		// sortVector(right);
-		// std::vector<int> temp;
-		// auto itL = left.begin();
-		// auto itR = right.begin();
-		// while (itL != left.end() && itR != right.end())
-		// {
-		// 	if (*itL == *itR)
-		// 		throw std::invalid_argument("Error");
-		// 	else if (*itL < *itR)
-		// 		temp.push_back(*itL++);
-		// 	else
-		// 		temp.push_back(*itR++);
-		// }
-		// while (itL != left.end())
-        // {
-		// 	temp.push_back(*itL++);
-		// }
-    	// while (itR != right.end())
-		// {
-        // 	temp.push_back(*itR++);
-		// }
-		// vec = temp;
-		// return ;
+		lst = temp;
+		return ;
 	}
+
 	
 	void PmergeMe::executeVector(char *argv[])
 	{
@@ -161,15 +140,30 @@
 		
 		for (int i = 1; argv[i]; i++)
 			vector.push_back(std::stoi(argv[i]));
-		sortVector(vector, 1);
+		sortVector(vector);
 		
 		//end timer	
 		auto stop = std::chrono::high_resolution_clock::now();
 		auto duration = std::chrono::duration<double, std::micro>(stop - start);
-		// printVector();
+		printVector();
 		std::cout << "Time to process a range of " << std::setw(4) << before.size() << " elements with std::vector : " << duration.count() << " us" << std::endl;
 	}
 
+	
+	void PmergeMe::executeList(char *argv[])
+	{
+		//start timer
+		auto start = std::chrono::high_resolution_clock::now();
+		
+		for (int i = 1; argv[i]; i++)
+			list.push_back(std::stoi(argv[i]));
+		sortList(list);
+		
+		//end timer	
+		auto stop = std::chrono::high_resolution_clock::now();
+		auto duration = std::chrono::duration<double, std::micro>(stop - start);
+		std::cout << "Time to process a range of " << std::setw(4) << before.size() << " elements with std::list   : " << duration.count() << " us" << std::endl;
+	}
 
 	void PmergeMe::printVector()
 	{

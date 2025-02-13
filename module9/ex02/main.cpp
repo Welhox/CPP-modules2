@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:21:17 by clundber          #+#    #+#             */
-/*   Updated: 2025/02/10 19:28:13 by clundber         ###   ########.fr       */
+/*   Updated: 2025/02/13 14:26:06 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int main(int argc, char *argv[])
 		sort.argVal(argv);
 		sort.printBefore();
 		sort.executeVector(argv);
-		sort.executeList(argv);
-		sort.printList();
+		// sort.executeList(argv);
+		// sort.printList();
 		// sort.printVector();
 		
 	}

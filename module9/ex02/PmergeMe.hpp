@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:22:20 by clundber          #+#    #+#             */
-/*   Updated: 2025/02/11 11:06:19 by clundber         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:31:26 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ private:
 	std::vector<int> before; 
 	std::list<int> list;
 	std::vector<int> vector;
+	std::vector<int> leftover;
 
 public:
 	PmergeMe();
@@ -37,8 +38,9 @@ public:
 	void executeList(char *argv[]);
 	void printVector();
 	void printList();
-	void sortVector(std::vector<int>&);
+	void sortVector(std::vector<int>&, int);
 	void sortList(std::list<int>& vec);
+	void chunkVec(std::vector<int>& vec, std::vector<std::vector<int>>& temp, int chunkSize);
 	void printBefore();
 
 };
