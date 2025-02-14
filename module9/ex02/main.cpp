@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:21:17 by clundber          #+#    #+#             */
-/*   Updated: 2025/02/13 14:26:06 by clundber         ###   ########.fr       */
+/*   Updated: 2025/02/14 11:17:02 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 		sort.executeVector(argv);
 		// sort.executeList(argv);
 		// sort.printList();
-		// sort.printVector();
+		sort.printVector();
 		
 	}
 	catch(const std::exception& e)

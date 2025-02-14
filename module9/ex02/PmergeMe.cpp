@@ -6,7 +6,7 @@
 /*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:21:58 by clundber          #+#    #+#             */
-/*   Updated: 2025/02/13 15:37:08 by clundber         ###   ########.fr       */
+/*   Updated: 2025/02/14 15:29:26 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,31 @@
 				pair++;
 			nbr++;
 		}
+		if (temp.size() > 1 && temp.back().empty())
+			temp.pop_back();
 	}
+
+	bool compareLast(const std::vector<int>& a, const std::vector<int>& b)
+	{
+		return a.back() < b.back();
+	}
+
+	int jacobsthal(int n) {
+    if (n == 0 || n == 1) {
+        return 1;
+    }
+
+    long a = 1;  // J_0
+    long b = 1;  // J_1
+
+    for (int i = 2; i <= n; ++i) {
+        long next = b + 2 * a;  // Recurrence relation: J_n = J_{n-1} + 2 * J_{n-2}
+        a = b;  // Move a to b (J_{n-2} becomes J_{n-1})
+        b = next;  // Move b to next (J_{n-1} becomes J_n)
+    }
+
+    return b;  // The last value computed is J_n
+}
 
 	void PmergeMe::sortVector(std::vector<int>& vec, int chunkSize)
 	{
@@ -103,55 +127,76 @@
 			for (auto it : temp[i])
 				vec.emplace_back(it);
 		}
-		printVector();
 		//recursively call itself again to do larger chunks
 		temp.clear();
 		sortVector(vec, chunkSize * 2);
+
 		chunkVec(vec, temp, chunkSize);
-		if (temp.size() % chunkSize != 0)
+
+		if (!temp.empty() && (int)temp.back().size() != chunkSize)
 		{
-			leftover = temp.back();
-			if (!vec.empty())
-				temp.pop_back();
+			leftover.insert(leftover.end(), temp.back().begin(), temp.back().end());
+			temp.pop_back();
 		}
 		vec.clear();
-		
 
+		//sort elements into main and pend
+		std::vector<int> pend;
+		for (size_t i = 0; i < temp.size(); i+= 2)
+		{
+			if (i + 1 >= temp.size())
+			{
+				pend.insert(pend.end(), temp[i].begin(), temp[i].end());
+				break ;
+			}
+			if(temp[i].empty() || temp[i +1].empty())
+				break;
+			if (temp[i].back() < temp[i +1].back())
+			{
+				vec.insert(vec.end(), temp[i].begin(), temp[i].end());
+				pend.insert(pend.end(), temp[i+1].begin(), temp[i+1].end());
+			}
+			else
+			{
+				pend.insert(pend.end(), temp[i].begin(), temp[i].end());
+				vec.insert(vec.end(), temp[i+1].begin(), temp[i+1].end());
+			}
+		}
 		
-
+		int prev = -1;
+		int next = -1;
+		int jNumb = 2;
+		int left = pend.size();
 		
-
-
+		while (left > 0)
+		{
+			prev = next;
+			next = jacobsthal(jNumb);
+			jNumb++;
+			if (next > (int)pend.size())
+				break ;
+			for(int i = next; i > prev; i--)
+			{
+				auto it = std::lower_bound(vec.begin(), vec.end(), pend[i]);
+				vec.insert(it, pend[i]);
+				left--;
+			}
+			
+		}
+		if (left > 0)
+		{
+			for(int i = (int)pend.size() -1; i > prev; i--)
+			{
+				auto it = std::lower_bound(vec.begin(), vec.end(), pend[i]);
+				vec.insert(it, pend[i]);
+			}
+		}
+		//put leftover back into main
+		vec.insert(vec.end(), leftover.begin(), leftover.end());
 		
-		// if (vec.size() < 2)
-		// 	return;
-		// auto mid = vec.begin() + vec.size() / 2;
-		// std::vector<int> left(vec.begin(), mid);
-		// std::vector<int> right(mid, vec.end());
-		// sortVector(left);
-		// sortVector(right);
-		// std::vector<int> temp;
-		// auto itL = left.begin();
-		// auto itR = right.begin();
-		// while (itL != left.end() && itR != right.end())
-		// {
-		// 	if (*itL == *itR)
-		// 		throw std::invalid_argument("Error");
-		// 	else if (*itL < *itR)
-		// 		temp.push_back(*itL++);
-		// 	else
-		// 		temp.push_back(*itR++);
-		// }
-		// while (itL != left.end())
-        // {
-		// 	temp.push_back(*itL++);
-		// }
-    	// while (itR != right.end())
-		// {
-        // 	temp.push_back(*itR++);
-		// }
-		// vec = temp;
-		// return ;
+		leftover.clear();
+		temp.clear();
+		pend.clear();
 	}
 	
 	void PmergeMe::executeVector(char *argv[])
