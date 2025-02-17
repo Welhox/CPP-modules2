@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
+/*   By: casimirri <clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:22:20 by clundber          #+#    #+#             */
-/*   Updated: 2025/02/14 10:29:48 by clundber         ###   ########.fr       */
+/*   Updated: 2025/02/16 22:44:45 by casimirri        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ public:
 	void printVector();
 	void printList();
 	void sortVector(std::vector<int>&, int);
-	void sortList(std::list<int>& vec);
+	void sortList(std::list<int>& lst, int chunkSize);
 	void chunkVec(std::vector<int>& vec, std::vector<std::vector<int>>& temp, int chunkSize);
+	void chunkLst(std::list<int>& lst, std::list<std::list<int>>& temp, int chunkSize);
 	void printBefore();
 
 };
