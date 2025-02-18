@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: casimirri <clundber@student.hive.fi>       +#+  +:+       +#+        */
+/*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:21:17 by clundber          #+#    #+#             */
-/*   Updated: 2025/02/16 22:47:07 by casimirri        ###   ########.fr       */
+/*   Updated: 2025/02/18 13:35:40 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,8 @@ int main(int argc, char *argv[])
 		PmergeMe sort;
 		sort.argVal(argv);
 		sort.printBefore();
-		// sort.executeVector(argv);
+		sort.executeVector(argv);
 		sort.executeList(argv);
-		sort.printList();
-		// sort.printVector();
-		
 	}
 	catch(const std::exception& e)
 	{

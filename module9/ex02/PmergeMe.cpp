@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: casimirri <clundber@student.hive.fi>       +#+  +:+       +#+        */
+/*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:21:58 by clundber          #+#    #+#             */
-/*   Updated: 2025/02/17 22:26:47 by casimirri        ###   ########.fr       */
+/*   Updated: 2025/02/18 13:35:31 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ void PmergeMe::sortVector(std::vector<int>& vec, int chunkSize)
 		prev = next;
 		next = jacobsthal(jNumb);
 		jNumb++;
-		if (next > (int)pend.size())
+		if (next >= (int)pend.size())
 			break ;
 		for(int i = next; i > prev; i--)
 		{
@@ -192,7 +192,8 @@ void PmergeMe::sortVector(std::vector<int>& vec, int chunkSize)
 		}
 	}
 	//put leftover back into main
-	vec.insert(vec.end(), leftover.begin(), leftover.end());
+	if (!leftover.empty())
+		vec.insert(vec.end(), leftover.begin(), leftover.end());
 	
 	leftover.clear();
 	temp.clear();
@@ -210,9 +211,9 @@ void PmergeMe::sortVector(std::vector<int>& vec, int chunkSize)
 		
 		//end timer	
 		auto stop = std::chrono::high_resolution_clock::now();
-		auto duration = std::chrono::duration<double, std::micro>(stop - start);
-		// printVector();
-		std::cout << "Time to process a range of " << std::setw(4) << before.size() << " elements with std::vector : " << duration.count() << " us" << std::endl;
+		auto duration = std::chrono::duration<double, std::milli>(stop - start);
+		printVector();
+		std::cout << "Time to process a range of " << std::setw(4) << before.size() << " elements with std::vector : " << duration.count() << " ms" << std::endl;
 	}
 
 void PmergeMe::chunkLst(std::list<int>& lst, std::list<std::list<int>>& temp, int chunkSize)
@@ -238,15 +239,6 @@ void PmergeMe::chunkLst(std::list<int>& lst, std::list<std::list<int>>& temp, in
 	}
 	if (temp.size() > 1 && temp.back().empty())
 		temp.pop_back();
-
-	// std::cout << "CHUNKS = \n";
-	// for(auto it : temp)
-	// {
-	// 	for (auto it2 : it)
-	// 		std::cout << it2 <<' ';
-	// 	std::cout << std::endl;
-	// }
-	
 }
 
 void PmergeMe::sortList(std::list<int>& lst, int chunkSize)
@@ -257,7 +249,8 @@ void PmergeMe::sortList(std::list<int>& lst, int chunkSize)
 	// //create the chunks as sub vectors of temp
 	chunkLst(lst, temp, chunkSize);
 	//sort the chunks with its neighbour
-	for(auto it = temp.begin(); it != temp.end(); it++)
+
+	for(auto it = temp.begin(); it != temp.end(); std::advance(it, 2))
 	{
 		auto it2 = it;
 		it2++;
@@ -267,7 +260,6 @@ void PmergeMe::sortList(std::list<int>& lst, int chunkSize)
 			break;
 		if(it->back() > it2->back() && (int)it2->size() == chunkSize)
 			std::swap(*it, *it2);
-		it++;
 	}
 	
 	lst.clear();
@@ -283,28 +275,21 @@ void PmergeMe::sortList(std::list<int>& lst, int chunkSize)
 	sortList(lst, chunkSize * 2);
 
 	chunkLst(lst, temp, chunkSize);
+
 	std::list<int> surplus;
 	//save last element in leftover, if it is not complete
 	if (!temp.empty() && (int)temp.back().size() != chunkSize)
 	{
-		auto it = surplus.begin();
-		surplus.splice(it, temp.back());
+		surplus.splice(surplus.begin(), temp.back());
+		if (temp.back().empty())
+			temp.pop_back();
 	}
 	
-	
-	// if (!temp.empty() && (int)temp.back().size() != chunkSize)
-	// {
-		// 	leftover.insert(leftover.end(), temp.back().begin(), temp.back().end());
-		// 	temp.pop_back();
-		// }
-		// lst.clear();
-		
-		
 	lst.clear();
 	
-//sort elements into main(lst) and pend
+	//sort elements into main(lst) and pend
 	std::list<int> pend;
-	for(auto it = temp.begin(); it != temp.end(); it++)
+	for(auto it = temp.begin(); it != temp.end(); std::advance(it, 2))
 	{
 		auto it2 = it;
 		it2++;
@@ -326,45 +311,7 @@ void PmergeMe::sortList(std::list<int>& lst, int chunkSize)
 			lst.splice(lst.end(), *it2);
 			pend.splice(pend.end(), *it);		
 		}
-		it++;
 	}
-	//sort elements into main(lst) and pend
-	// std::vector<int> pend;
-	// for (size_t i = 0; i < temp.size(); i+= 2)
-	// {
-	// 	if (i + 1 >= temp.size())
-	// 	{
-	// 		pend.insert(pend.end(), temp[i].begin(), temp[i].end());
-	// 		break ;
-	// 	}
-	// 	if(temp[i].empty() || temp[i +1].empty())
-	// 		break;
-	// 	if (temp[i].back() < temp[i +1].back())
-	// 	{
-	// 		lst.insert(lst.end(), temp[i].begin(), temp[i].end());
-	// 		pend.insert(pend.end(), temp[i+1].begin(), temp[i+1].end());
-	// 	}
-	// 	else
-	// 	{
-	// 		pend.insert(pend.end(), temp[i].begin(), temp[i].end());
-	// 		lst.insert(lst.end(), temp[i+1].begin(), temp[i+1].end());
-	// 	}
-	// }
-
-	std::cout << "LIST = ";
-	for(auto it : lst)
-		std::cout << it <<' ';
-	std::cout << std::endl;
-	
-	std::cout << "PEND = ";
-	for(auto it : pend)
-		std::cout << it <<' ';
-	std::cout << std::endl;
-
-	std::cout << "SURPLUS = ";
-	for(auto it : surplus)
-		std::cout << it <<' ';
-	std::cout << std::endl;
 	
 	int prev = 0;
 	int next = 0;
@@ -391,20 +338,11 @@ void PmergeMe::sortList(std::list<int>& lst, int chunkSize)
 				break;
 		}
 
-		
-		// for(int i = next ; i > prev; i--)
-		// {
-		// 	auto it = std::lower_bound(lst.begin(), lst.end(), *pendIt);
-		// 	lst.insert(it, *pendIt);
-		// 	pendIt--;
-		// 	left--;
-		// }
 	}
 
 	if (left > 0)
 	{
 		auto pendIt = pend.rbegin();
-		// std::advance(pendIt, (int)pend.size() -2); //maybe -2
 		for(int i = (int)pend.size(); i > prev; i--)
 		{
 			auto it = std::lower_bound(lst.begin(), lst.end(), *pendIt);
@@ -414,12 +352,6 @@ void PmergeMe::sortList(std::list<int>& lst, int chunkSize)
 	}
 	// //put surplus back into main
 	lst.splice(lst.end(), surplus);
-	
-	std::cout << "LIST = ";
-	for(auto it : lst)
-		std::cout << it <<' ';
-	std::cout << std::endl;
-	// lst.insert(lst.end(), leftover.begin(), leftover.end());
 	
 	surplus.clear();
 	temp.clear();
@@ -437,8 +369,8 @@ void PmergeMe::sortList(std::list<int>& lst, int chunkSize)
 		
 		//end timer	
 		auto stop = std::chrono::high_resolution_clock::now();
-		auto duration = std::chrono::duration<double, std::micro>(stop - start);
-		std::cout << "Time to process a range of " << std::setw(4) << before.size() << " elements with std::list   : " << duration.count() << " us" << std::endl;
+		auto duration = std::chrono::duration<double, std::milli>(stop - start);
+		std::cout << "Time to process a range of " << std::setw(4) << before.size() << std::setprecision(5) << " elements with std::list   : " << duration.count() << " ms" << std::endl;
 	}
 
 	
