@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPN.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: casimirri <clundber@student.hive.fi>       +#+  +:+       +#+        */
+/*   By: clundber < clundber@student.hive.fi>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 00:31:33 by casimirri         #+#    #+#             */
-/*   Updated: 2025/02/11 16:01:07 by casimirri        ###   ########.fr       */
+/*   Updated: 2025/02/19 11:36:42 by clundber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ RPN::RPN(std::string newArg): arg(newArg)
 {
 	if (arg.empty())
 		throw std::invalid_argument("Error");
-	std::regex pattern(R"(^(-?\d+(\s-?\d+)*(\s[+\-/*])*)$)");
+	std::regex pattern(R"(^(-?\d+|[+\-*/])(?: (-?\d+|[+\-*/]))*$)");
 	if (!std::regex_match(arg, pattern))
 		throw std::invalid_argument("Error");
 	
